@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Banana Cultivation</string>
+    <string name="user_name">User name</string>
+    <string name="user_password">Password</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+    <string name="fullname">Full Name</string>
+    <string name="email">Email</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+</resources>
