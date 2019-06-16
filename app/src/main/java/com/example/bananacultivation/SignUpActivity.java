@@ -12,7 +12,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private EditText editTextusername, editTextPassword,editTextFullName,editTextEmail;
     private Button buttonSave, buttonCancel;
-
+//Test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
