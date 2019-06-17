@@ -8,4 +8,9 @@
     <string name="email">Email</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="error">Error</string>
+    <string name="ok">Ok</string>
+    <string name="can_not_create">Can not create new account</string>
+    <string name="invalid_account">Invalid Account</string>
+    <string name="username_exists">Username Exists</string>
 </resources>
