@@ -27,13 +27,13 @@ public class AccountDB extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-sqLiteDatabase.execSQL("create table " + tableName + " ("+
-        idColumn + "integer primary key autoincrement, " +
+        sqLiteDatabase.execSQL("create table " + tableName + " ("+
+        idColumn + " integer primary key autoincrement, " +
         usernameColumn + " text, " +
         passwordColumn + " text, " +
         fullnameColumn + " text, " +
         emailColumn + " text " +
-        " ) " );
+        ")");
     }
 
     @Override
@@ -50,7 +50,7 @@ sqLiteDatabase.execSQL("create table " + tableName + " ("+
             contentValues.put(passwordColumn,account.getPassword());
             contentValues.put(fullnameColumn,account.getFullName());
             contentValues.put(emailColumn,account.getEmail());
-            result=sqLiteDatabase.insert(tableName,null,contentValues)>0;
+            result=sqLiteDatabase.insert(tableName,null,contentValues) > 0;
         }
         catch (Exception e){
             result =false;
@@ -61,7 +61,7 @@ sqLiteDatabase.execSQL("create table " + tableName + " ("+
         Account account=null;
         try{
             SQLiteDatabase sqLiteDatabase=getWritableDatabase();
-            Cursor cursor=sqLiteDatabase.rawQuery("select * from " + tableName+ " where username = ? and password=?", new String[]{username, password});
+            Cursor cursor=sqLiteDatabase.rawQuery("select * from " + tableName + " where username = ? and password=?", new String[]{username, password});
             if (cursor.moveToFirst()){
                 account=new Account();
                 account.setId(cursor.getInt(0));
@@ -81,7 +81,7 @@ sqLiteDatabase.execSQL("create table " + tableName + " ("+
         Account account=null;
         try{
             SQLiteDatabase sqLiteDatabase=getWritableDatabase();
-            Cursor cursor=sqLiteDatabase.rawQuery("select * from " + tableName+ " where username = ?",new String[]{username});
+            Cursor cursor=sqLiteDatabase.rawQuery("select * from " + tableName + " where username = ?",new String[]{username});
             if (cursor.moveToFirst()){
                 account=new Account();
                 account.setId(cursor.getInt(0));

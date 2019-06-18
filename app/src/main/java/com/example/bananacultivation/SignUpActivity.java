@@ -15,16 +15,16 @@ import com.example.entities.Account;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private EditText editTextusername, editTextPassword,editTextFullName,editTextEmail;
+    private EditText editTextUsername, editTextPassword,editTextFullName,editTextEmail;
     private Button buttonSave, buttonCancel;
-//Test
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_signup);
         setTitle(R.string.signup);
 
-        editTextusername=findViewById(R.id.editTextUserName);
+        editTextUsername=findViewById(R.id.editTextUserName);
         editTextPassword=findViewById(R.id.editTextPassword);
         editTextFullName=findViewById(R.id.editTextFullName);
         editTextEmail=findViewById(R.id.editTextEmail);
@@ -56,8 +56,8 @@ public class SignUpActivity extends AppCompatActivity {
             account.setEmail(editTextEmail.getText().toString());
             account.setFullName(editTextFullName.getText().toString());
             account.setPassword(editTextPassword.getText().toString());
-            account.setUsername(editTextusername.getText().toString());
-            Account temp=accountDB.checkUsername(editTextusername.getText().toString());
+            account.setUsername(editTextUsername.getText().toString());
+            Account temp=accountDB.checkUsername(editTextUsername.getText().toString());
             if (temp == null){
                 if (accountDB.create(account)){
                 Intent intent=new Intent(SignUpActivity.this,MainActivity.class);

@@ -15,7 +15,7 @@ import com.example.entities.Account;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText editTextusername, editTextPassword;
+    private EditText editTextUsername, editTextPassword;
     private Button buttonLogin, buttonSignUp;
 
     @Override
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editTextusername=findViewById(R.id.editTextUserName);
+        editTextUsername=findViewById(R.id.editTextUserName);
         editTextPassword=findViewById(R.id.editTextPassword);
 
         //Button
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void buttonLogin_onClick(View view){
         AccountDB accountDB=new AccountDB(getApplicationContext());
-        String username=editTextusername.getText().toString();
+        String username=editTextUsername.getText().toString();
         String password=editTextPassword.getText().toString();
         Account account=accountDB.login(username,password);
         if (account==null){

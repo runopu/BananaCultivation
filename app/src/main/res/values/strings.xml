@@ -13,4 +13,7 @@
     <string name="can_not_create">Can not create new account</string>
     <string name="invalid_account">Invalid Account</string>
     <string name="username_exists">Username Exists</string>
+    <string name="welcome">Welcome</string>
+    <string name="change_profile">Change Profile</string>
+    <string name="change_profile_btn">Change profile</string>
 </resources>
