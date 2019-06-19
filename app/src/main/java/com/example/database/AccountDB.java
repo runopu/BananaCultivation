@@ -57,6 +57,24 @@ public class AccountDB extends SQLiteOpenHelper {
         }
         return result;
     }
+
+    public  boolean update (Account account){
+        boolean result=true;
+        try {
+            SQLiteDatabase sqLiteDatabase=getWritableDatabase();
+            ContentValues contentValues=new ContentValues();
+            contentValues.put(usernameColumn,account.getUsername());
+            contentValues.put(passwordColumn,account.getPassword());
+            contentValues.put(fullnameColumn,account.getFullName());
+            contentValues.put(emailColumn,account.getEmail());
+            result=sqLiteDatabase.update(tableName,contentValues,idColumn+"=?",new String[]{String.valueOf(account.getId())})>0;
+        }
+        catch (Exception e){
+            result =false;
+        }
+        return result;
+    }
+
     public Account login(String username,String password){
         Account account=null;
         try{
@@ -82,6 +100,26 @@ public class AccountDB extends SQLiteOpenHelper {
         try{
             SQLiteDatabase sqLiteDatabase=getWritableDatabase();
             Cursor cursor=sqLiteDatabase.rawQuery("select * from " + tableName + " where username = ?",new String[]{username});
+            if (cursor.moveToFirst()){
+                account=new Account();
+                account.setId(cursor.getInt(0));
+                account.setUsername(cursor.getString(1));
+                account.setPassword(cursor.getString(2));
+                account.setFullName(cursor.getString(3));
+                account.setEmail(cursor.getString(4));
+            }
+        }
+        catch (Exception e){
+            account=null;
+        }
+        return account;
+    }
+
+    public Account find(int id){
+        Account account=null;
+        try{
+            SQLiteDatabase sqLiteDatabase=getWritableDatabase();
+            Cursor cursor=sqLiteDatabase.rawQuery("select * from " + tableName + " where id = ?",new String[]{String.valueOf(id)});
             if (cursor.moveToFirst()){
                 account=new Account();
                 account.setId(cursor.getInt(0));

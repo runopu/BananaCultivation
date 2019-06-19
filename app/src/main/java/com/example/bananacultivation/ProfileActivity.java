@@ -2,12 +2,15 @@ package com.example.bananacultivation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.database.AccountDB;
 import com.example.entities.Account;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -48,7 +51,67 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
     public void buttonSave_onClick(View view){
+        try{
+            AccountDB accountDB=new AccountDB(getApplicationContext());
+            Account currentAccount=accountDB.find(account.getId());
+            String newUsername=editTextUsername.getText().toString();
+            Account temp=accountDB.checkUsername(newUsername);
+            if (!newUsername.equalsIgnoreCase(currentAccount.getUsername())&& temp!=null)
+            {
+                AlertDialog.Builder builder=new AlertDialog.Builder(view.getContext());
+                builder.setTitle(R.string.error);
+                builder.setMessage(R.string.username_exists);
+                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                builder.show();
+                return;
+            }
 
+
+                currentAccount.setUsername(editTextUsername.getText().toString());
+                currentAccount.setFullName(editTextFullName.getText().toString());
+                currentAccount.setEmail(editTextEmail.getText().toString());
+                String password=editTextPassword.getText().toString();
+                if (!password.isEmpty()){
+                    currentAccount.setPassword(editTextPassword.getText().toString());
+                }
+                if (accountDB.update(currentAccount)){
+                    Intent intent=new Intent(ProfileActivity.this,WelcomeActivity.class);
+                    intent.putExtra("account",currentAccount);
+                    startActivity(intent);
+                }
+                else
+                {
+                    AlertDialog.Builder builder=new AlertDialog.Builder(view.getContext());
+                    builder.setTitle(R.string.error);
+                    builder.setMessage(R.string.failed);
+                    builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                    builder.show();
+
+                }
+
+        }
+        catch (Exception e){
+            AlertDialog.Builder builder=new AlertDialog.Builder(view.getContext());
+            builder.setTitle(R.string.error);
+            builder.setMessage(e.getMessage());
+            builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+            builder.show();
+        }
     }
     private void loadData(){
         Intent intent=getIntent();

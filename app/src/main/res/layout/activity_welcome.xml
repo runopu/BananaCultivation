@@ -19,4 +19,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/change_profile_btn" />
+
+    <Button
+        android:id="@+id/buttonCancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel" />
 </LinearLayout>

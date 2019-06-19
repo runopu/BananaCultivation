@@ -12,8 +12,9 @@ import com.example.entities.Account;
 
 public class WelcomeActivity extends AppCompatActivity {
     private TextView textViewWelcome;
-    private Button buttonChangeProfile;
+    private Button buttonChangeProfile, buttonCancel;
     private  Account account;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,15 @@ public class WelcomeActivity extends AppCompatActivity {
         account =(Account)intent.getSerializableExtra("account");
         textViewWelcome.setText(getString(R.string.welcome)+" "+account.getUsername());
 
+        buttonCancel=findViewById(R.id.buttonCancel);
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(WelcomeActivity.this,MainActivity.class);
+                intent.putExtra("account",account);
+                startActivity(intent);
+            }
+        });
         buttonChangeProfile=findViewById(R.id.buttonChangeProfile);
         buttonChangeProfile.setOnClickListener(new View.OnClickListener() {
             @Override
